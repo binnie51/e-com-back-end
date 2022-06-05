@@ -1,5 +1,5 @@
 # e-com-back-end
-Building a quality back-end for an E-commerence website using Express API to use Sequelize to interact with a MySQL
+Building a quality back-end for an E-commerence website using Express API to use Sequelize to interact with a MySQL database.
 
 ## Acceptance Criteria
 
