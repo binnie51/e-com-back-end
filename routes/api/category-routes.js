@@ -12,7 +12,9 @@ router.get('/', async (req, res) => {
       include: [{ model: Product}],
       attributes: {
         include: [
-          sequelize.
+          sequelize.literal(
+            ``
+          )
         ]
       }
     })
