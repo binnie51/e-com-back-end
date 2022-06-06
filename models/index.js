@@ -21,12 +21,12 @@ Product.belongsTo(Tag, {
   as: 'product_tag'
 });
 // Tags belongToMany Products (through ProductTag)
-Tag.belongsTo(Tag, {
+Tag.belongsTo(Product, {
   trough: {
     model: ProductTag,
     foreignKey: 'product_id'
   },
-  as: 'product_tag'
+  as: 'tag_product'
 });
 
 module.exports = {
