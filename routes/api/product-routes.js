@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
       include: [{ model: Category}, { model: Tag, through: ProductTag, as: 'product_tag'}],
     });
 
-    if (!productData === 0) {
+    if (!productData) {
       res.status(400).json({ message: "No product data with that ID!" });
     }
     else {
