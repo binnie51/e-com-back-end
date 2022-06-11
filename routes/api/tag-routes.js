@@ -8,7 +8,13 @@ router.get('/', async (req, res) => {
   // include its associated Product data
   try {
     const tagData = await Tag.findAll({
-      include: [{ model: Product, through: ProductTag, as: 'tag_product'}]
+      attributes: ["id", "tag_name"],
+      include: [
+        { model: Product, 
+          through: ProductTag, 
+          attributes: ["id", "product_name", "price", "stock", "category_id"],
+        }
+      ]
     });
     res.status(200).json(tagData);
   }
@@ -22,7 +28,14 @@ router.get('/:id', async (req, res) => {
   // include its associated Product data
   try {
     const tagData = await Tag.findByPk(req.params.id, {
-      include: [{ model: Product, through: ProductTag, as: 'tag_product' }],
+      attributes: ["id", "tag_name"],
+      include: [
+        { 
+          model: Product, 
+          through: ProductTag, 
+          attributes: ["id", "product_name", "price", "stock", "category_id"], 
+        }
+      ],
     });
     res.status(200).json(tagData);
   }
@@ -35,7 +48,9 @@ router.post('/', async (req, res) => {
   // create a new tag
   try {
     if (req.body) {
-      const newTag = await Tag.create(req.body);
+      const newTag = await Tag.create({
+        tag_name: req.body.tag_name,
+      });
 
       res.status(200).json(newTag);
     }
@@ -48,7 +63,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
   try {
     if(req.body && req.params.id) {
